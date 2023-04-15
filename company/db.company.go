@@ -4,6 +4,11 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+func getNext100Companies(ctx *gin.Context, companies *[]Company, cid uint) error {
+	tx := db.WithContext(ctx).Where("id < ?", cid).Order("id DESC").Limit(100).Find(companies)
+	return tx.Error
+}
+
 func getAllCompanies(ctx *gin.Context, companies *[]Company) error {
 	tx := db.WithContext(ctx).Find(companies)
 	return tx.Error

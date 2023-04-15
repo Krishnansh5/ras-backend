@@ -21,7 +21,7 @@ func main() {
 
 	gin.SetMode(gin.ReleaseMode)
 
-	go mail.Service(mail_channel)
+	// go mail.Service(mail_channel)
 
 	g.Go(func() error {
 		return authServer(mail_channel).ListenAndServe()
@@ -38,7 +38,7 @@ func main() {
 	g.Go(func() error {
 		return companyServer().ListenAndServe()
 	})
-
+  
 	g.Go(func() error {
 		return adminRCServer(mail_channel).ListenAndServe()
 	})
